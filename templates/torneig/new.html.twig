@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Torneig{% endblock %}
+
+{% block body %}
+
+    <div class="row m-0">
+        {# <div class="col-1"></div> #}
+        <div class="col-12 p-5">
+            <h1 class="text-white ">Crea Nou Torneig</h1>
+
+            {{ include('torneig/_form.html.twig') }}
+
+            <a href="{{ path('torneig_index') }}">Tornar Enrrera</a>
+        </div>
+        {# <div class="col-1"></div> #}
+    </div>
+{% endblock %}

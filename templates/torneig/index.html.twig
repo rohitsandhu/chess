@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Torneig index{% endblock %}
+
+{% block body %}
+
+
+    <div class="container-fluid">
+        <div class="row m-0 m-5 ">
+
+
+            <div class="col-12 p-3 rounded shadow" style="background-color: rgba(255,255,255,0.4)">
+                <h1 class="text-white">Torneig index</h1>
+
+                <table class="table rounded shadow">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th>Pais</th>
+                        <th>NumRondes</th>
+                        <th>NumByes</th>
+                        <th>actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for torneig in torneigs %}
+                        <tr>
+                            <td>{{ torneig.id }}</td>
+                            <td>{{ torneig.nom }}</td>
+                            <td>{{ torneig.pais }}</td>
+                            <td>{{ torneig.numRondes }}</td>
+                            <td>{{ torneig.numByes }}</td>
+                            <td>
+                                <a class="btn btn-dark" title="Mostrar Torneig"
+                                   href="{{ path('torneig_show', {'id': torneig.id}) }}"><i class="bi bi-eye"></i></a>
+                                <a class="btn btn-dark" title="Editar Torneig"
+                                   href="{{ path('torneig_edit', {'id': torneig.id}) }}"><i
+                                            class="bi bi-pencil"></i></a>
+                                <a class="btn btn-dark" title="Llistar jugadors"
+                                   href="{{ path('torneig_llistaJugadors', {'id': torneig.id}) }}"><i
+                                            class="bi bi-person-plus"></i></a>
+                                {% if torneig.estat == 0 %}
+                                    <a class="btn btn-success" title="Començar torneig"
+                                       href="{{ path('comencar_torneig', {'id': torneig.id}) }}"><i
+                                                class="bi bi-play"></i></a>
+                                {% endif %}
+                                {% if torneig.estat == 1 %}
+                                    <a class="btn btn-success" title="Veure ronda"
+                                       href="{{ path('veure_ronda', {'id': torneig.id}) }}"><i
+                                                class="bi bi-arrow-right"></i></a>
+                                {% endif %}
+                                <form method="post" id="formulariDelete"
+                                      action="{{ path('torneig_delete', {'id': torneig.id}) }}"
+                                      onsubmit="return confirm('Estas segur de que vols borrar el torneig?');">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ torneig.id) }}">
+                                    <button class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="6">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <a class="btn btn-success" title="Crear Torneig" href="{{ path('torneig_new') }}"><i
+                            class="bi bi-plus"></i></a>
+            </div>
+        </div>
+        {# <div class="col-1"></div> #}
+        {# </div> #}
+    </div>
+{% endblock %}

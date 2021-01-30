@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.datatables.net/v/dt/dt-1.10.22/r-2.2.6/datatables.min.css"/>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.22/r-2.2.6/datatables.min.js"></script>
+    <link rel="stylesheet" href="{{ '/css/styles.css' }}">
+    <link rel="icon" href="{{ '/imgs/iconKing.png' }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    {% block stylesheets %}{% endblock %}
+</head>
+<body style="background-image: url('{{ '/imgs/background2.jpg' }}')">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        {# <a class="navbar-brand" href="{{ path('main') }}">Chess</a> #}
+        <a class="navbar-brand js-scroll-trigger" href="{{ path('main') }}"> Chess&nbsp;<img width="40px"
+                                                                                             src="{{ '/imgs/iconKing.png' }}"
+                                                                                             alt=""/>&nbsp;King</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                {# <li class="nav-item"> #}
+                {# <a class="nav-link" href="#">Inici</a> #}
+                {# </li> #}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Torneig
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" href="{{ path("torneig_index") }}">Veure Tornejos</a></li>
+                        <li><a class="dropdown-item" href="{{ path("torneig_new") }}">Crear Torneig</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Jugadors
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" href="{{ path("jugador_index") }}">Veure Jugadors</a></li>
+                        <li><a class="dropdown-item" href="{{ path("jugador_new") }}">Crear Jugador</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="navbar-nav text-uppercase ml-auto">
+                {% if   app.session.get('arbitreLogged') == null %}
+
+                {% else %}
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" style="color: white;"
+                                            href="{{ path('logout') }}">LOG OUT</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+{% block body %}{% endblock %}
+{% block javascripts %}{% endblock %}
+</body>
+</html>

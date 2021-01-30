@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Jugador index{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid">
+        <div class="row m-0 m-5 ">
+            <div class="col-12 p-3 rounded shadow" style="background-color: rgba(255,255,255,0.4)">
+                <h1 class="text-white">Jugador index</h1>
+
+                <table class="table rounded shadow">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th>Cognoms</th>
+                        <th>Equip</th>
+                        <th>Pais</th>
+                        <th>Elo</th>
+                        <th>Byes</th>
+                        <th>actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for jugador in jugadors %}
+                        <tr>
+                            <td>{{ jugador.id }}</td>
+                            <td>{{ jugador.nom }}</td>
+                            <td>{{ jugador.cognoms }}</td>
+                            <td>{{ jugador.equip }}</td>
+                            <td>{{ jugador.pais }}</td>
+                            <td>{{ jugador.elo }}</td>
+                            <td>{{ jugador.byes }}</td>
+                            <td>
+                                <a href="{{ path('jugador_show', {'id': jugador.id}) }}">show</a>
+                                <a href="{{ path('jugador_edit', {'id': jugador.id}) }}">edit</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="8">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <a href="{{ path('jugador_new') }}" class="btn btn-success" title="Crear Jugador"><i class="bi bi-plus"></i></a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
